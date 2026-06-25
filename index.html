@@ -579,7 +579,7 @@
 </div>
 
 <script>
-  function submitForm() {
+  async function submitForm() {
     const required = ['owner-name','owner-phone','store-name','store-address','store-size','close-date','detail'];
     for (const id of required) {
       const el = document.getElementById(id);
@@ -587,30 +587,31 @@
       el.style.borderColor='';
     }
 
-    const name    = document.getElementById('owner-name').value;
-    const phone   = document.getElementById('owner-phone').value;
-    const store   = document.getElementById('store-name').value;
-    const address = document.getElementById('store-address').value;
-    const size    = document.getElementById('store-size').value;
-    const date    = document.getElementById('close-date').value;
-    const detail  = document.getElementById('detail').value;
+    const data = {
+      '사장님 존함':  document.getElementById('owner-name').value,
+      '사장님 번호':  document.getElementById('owner-phone').value,
+      '가게 이름':    document.getElementById('store-name').value,
+      '가게 주소':    document.getElementById('store-address').value,
+      '가게 평수':    document.getElementById('store-size').value,
+      '폐업 일정':    document.getElementById('close-date').value,
+      '세부 내용':    document.getElementById('detail').value,
+    };
 
-    ChannelIO('updateUser', {
-      profile: { name: name, mobileNumber: phone }
-    });
-
-    ChannelIO('track', '견적신청', {
-      '가게이름': store,
-      '가게주소': address,
-      '가게평수': size,
-      '폐업일정': date,
-      '세부내용': detail
-    });
-
-    ChannelIO('openChat', undefined, '안녕하세요! 견적 신청이 접수되었습니다. 빠른 시간 내에 연락드리겠습니다.');
-
-    document.getElementById('form-body').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
+    try {
+      const res = await fetch('https://formspree.io/f/xykqeyjq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        document.getElementById('form-body').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      }
+    } catch (e) {
+      alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    }
   }
 </script>
 
