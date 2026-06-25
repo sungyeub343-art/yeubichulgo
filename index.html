@@ -586,6 +586,29 @@
       if (!el.value.trim()) { el.focus(); el.style.borderColor='var(--c-accent)'; return; }
       el.style.borderColor='';
     }
+
+    const name    = document.getElementById('owner-name').value;
+    const phone   = document.getElementById('owner-phone').value;
+    const store   = document.getElementById('store-name').value;
+    const address = document.getElementById('store-address').value;
+    const size    = document.getElementById('store-size').value;
+    const date    = document.getElementById('close-date').value;
+    const detail  = document.getElementById('detail').value;
+
+    ChannelIO('updateUser', {
+      profile: { name: name, mobileNumber: phone }
+    });
+
+    ChannelIO('track', '견적신청', {
+      '가게이름': store,
+      '가게주소': address,
+      '가게평수': size,
+      '폐업일정': date,
+      '세부내용': detail
+    });
+
+    ChannelIO('openChat', undefined, '안녕하세요! 견적 신청이 접수되었습니다. 빠른 시간 내에 연락드리겠습니다.');
+
     document.getElementById('form-body').style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
   }
