@@ -139,6 +139,18 @@
     .gallery-grid img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--r); }
     @media(max-width:640px){ .gallery-grid{grid-template-columns:1fr 1fr;} }
 
+    /* ── 시공 후기 ── */
+    #construction-log { background:var(--c-white); }
+    .log-list { display:flex; flex-direction:column; gap:1rem; margin-top:2.5rem; }
+    .log-item { display:flex; gap:1.4rem; background:var(--c-bg); border-radius:var(--r); padding:1.2rem; align-items:flex-start; transition:box-shadow .2s; }
+    .log-item:hover { box-shadow:0 4px 16px rgba(0,0,0,.08); }
+    .log-item img { width:140px; height:100px; object-fit:cover; border-radius:6px; flex-shrink:0; }
+    .log-body { flex:1; }
+    .log-meta { font-size:.75rem; font-weight:700; color:var(--c-accent); margin-bottom:.4rem; }
+    .log-body h3 { font-size:.95rem; font-weight:800; color:var(--c-black); margin-bottom:.4rem; line-height:1.5; }
+    .log-body p { font-size:.82rem; color:var(--c-gray); line-height:1.7; }
+    @media(max-width:640px){ .log-item{flex-direction:column;} .log-item img{width:100%;height:180px;} }
+
     /* ── REVIEWS ── */
     #reviews { background:var(--c-white); }
     .reviews-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem; margin-top:3rem; }
@@ -250,7 +262,8 @@
     <a href="#why">선택이유</a>
     <a href="#subsidy">폐업지원금</a>
     <a href="#gallery">시공사례</a>
-    <a href="#reviews">시공후기</a>
+    <a href="#construction-log">시공후기</a>
+    <a href="#reviews">고객후기</a>
     <a href="#quote-form" class="btn-header">무료 견적 신청</a>
   </nav>
   <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-nav').classList.add('open')" aria-label="메뉴열기">☰</button>
@@ -421,6 +434,49 @@
       <img src="gal-3.jpg?v=3" alt="시공사례2" loading="lazy" />
       <img src="gal-4.jpg?v=3" alt="시공사례3" loading="lazy" />
       <img src="gal-5.jpg?v=3" alt="시공사례4" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- 시공 후기 -->
+<section id="construction-log">
+  <div class="container">
+    <div class="section-eyebrow">시공 후기</div>
+    <h2 class="section-title">여비철거가 <em>직접 시공한</em> 현장 기록</h2>
+    <p class="section-lead">여비철거가 직접 시공한 전국 상가철거·건물해체·폐기물처리 현장 기록입니다.</p>
+    <div class="log-list">
+      <div class="log-item">
+        <img src="gal-2.jpg?v=3" alt="시공사례1" loading="lazy" />
+        <div class="log-body">
+          <div class="log-meta">2026.06.26 · 강원 강릉</div>
+          <h3>강릉 상가 철거 완료 — 1층 전체 원상복구 시공</h3>
+          <p>강원 강릉 상가 매장 철거 완료. 내부 인테리어 철거부터 폐기물 처리까지 원스톱으로 진행. 추가 비용 없이 견적 그대로 마무리.</p>
+        </div>
+      </div>
+      <div class="log-item">
+        <img src="gal-3.jpg?v=3" alt="시공사례2" loading="lazy" />
+        <div class="log-body">
+          <div class="log-meta">2026.06.24 · 강원 속초</div>
+          <h3>속초 건물 해체 완료 — 중장비 투입 전체 철거</h3>
+          <p>강원 속초 노후 건물 전체 해체 시공 완료. 전문 중장비 직접 보유로 빠르고 안전하게 마무리. 폐기물 처리 증빙서류 100% 발행.</p>
+        </div>
+      </div>
+      <div class="log-item">
+        <img src="gal-4.jpg?v=3" alt="시공사례3" loading="lazy" />
+        <div class="log-body">
+          <div class="log-meta">2026.06.22 · 강원 원주</div>
+          <h3>원주 상가 인테리어 철거 — 폐업 원상복구 완료</h3>
+          <p>강원 원주 상가 폐업 철거 완료. 인테리어 전체 철거 및 폐기물 처리까지 당일 시공. 임대인 확인 후 원상복구 완료 증빙 제공.</p>
+        </div>
+      </div>
+      <div class="log-item">
+        <img src="gal-5.jpg?v=3" alt="시공사례4" loading="lazy" />
+        <div class="log-body">
+          <div class="log-meta">2026.06.20 · 강원 동해</div>
+          <h3>동해 상가 철거 완료 — 내부 전체 해체 시공</h3>
+          <p>강원 동해 상가 전체 철거 완료. 소음·분진 방지 조치 완벽 시행으로 민원 0건. 시간 약속 100% 엄수 후 깔끔하게 마무리.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
