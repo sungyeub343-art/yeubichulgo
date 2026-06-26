@@ -142,14 +142,27 @@
     /* ── 시공 후기 ── */
     #construction-log { background:var(--c-white); }
     .log-list { display:flex; flex-direction:column; gap:1rem; margin-top:2.5rem; }
-    .log-item { display:flex; gap:1.4rem; background:var(--c-bg); border-radius:var(--r); padding:1.2rem; align-items:flex-start; transition:box-shadow .2s; }
-    .log-item:hover { box-shadow:0 4px 16px rgba(0,0,0,.08); }
+    .log-item { display:flex; gap:1.4rem; background:var(--c-bg); border-radius:var(--r); padding:1.2rem; align-items:flex-start; transition:box-shadow .2s; cursor:pointer; }
+    .log-item:hover { box-shadow:0 4px 16px rgba(0,0,0,.12); transform:translateY(-1px); }
     .log-item img { width:140px; height:100px; object-fit:cover; border-radius:6px; flex-shrink:0; }
     .log-body { flex:1; }
     .log-meta { font-size:.75rem; font-weight:700; color:var(--c-accent); margin-bottom:.4rem; }
     .log-body h3 { font-size:.95rem; font-weight:800; color:var(--c-black); margin-bottom:.4rem; line-height:1.5; }
     .log-body p { font-size:.82rem; color:var(--c-gray); line-height:1.7; }
     @media(max-width:640px){ .log-item{flex-direction:column;} .log-item img{width:100%;height:180px;} }
+
+    /* ── 시공후기 상세 모달 ── */
+    .log-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:400; align-items:center; justify-content:center; padding:1rem; }
+    .log-modal-overlay.open { display:flex; }
+    .log-modal { background:#fff; border-radius:12px; width:100%; max-width:600px; max-height:90vh; overflow-y:auto; position:relative; }
+    .log-modal-back { display:flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:700; color:var(--c-charcoal); background:var(--c-bg); border:none; cursor:pointer; padding:.7rem 1.2rem; width:100%; border-radius:12px 12px 0 0; border-bottom:1px solid var(--c-silver); font-family:var(--ff-body); }
+    .log-modal-back:hover { color:var(--c-accent); }
+    .log-modal-content { padding:1.8rem; }
+    .log-modal-content .log-meta { font-size:.78rem; font-weight:700; color:var(--c-accent); margin-bottom:.6rem; }
+    .log-modal-content h2 { font-family:var(--ff-display); font-size:1.2rem; font-weight:900; color:var(--c-black); line-height:1.4; margin-bottom:1.2rem; }
+    .log-modal-content img { width:100%; border-radius:var(--r); margin-bottom:1.4rem; }
+    .log-modal-content .log-detail { font-size:.88rem; color:var(--c-charcoal); line-height:1.9; white-space:pre-line; }
+    .log-modal-call { display:block; width:100%; background:var(--c-accent); color:#fff; text-align:center; padding:1rem; font-size:1rem; font-weight:800; text-decoration:none; border-radius:8px; margin-top:1.8rem; font-family:var(--ff-body); }
 
     /* ── REVIEWS ── */
     #reviews { background:var(--c-white); }
@@ -445,39 +458,55 @@
     <h2 class="section-title">여비철거가 <em>직접 시공한</em> 현장 기록</h2>
     <p class="section-lead">여비철거가 직접 시공한 전국 상가철거·건물해체·폐기물처리 현장 기록입니다.</p>
     <div class="log-list">
-      <div class="log-item">
+      <div class="log-item" onclick="openLog(0)">
         <img src="gal-2.jpg?v=3" alt="시공사례1" loading="lazy" />
         <div class="log-body">
           <div class="log-meta">2026.06.26 · 강원 강릉</div>
           <h3>강릉 상가 철거 완료 — 1층 전체 원상복구 시공</h3>
-          <p>강원 강릉 상가 매장 철거 완료. 내부 인테리어 철거부터 폐기물 처리까지 원스톱으로 진행. 추가 비용 없이 견적 그대로 마무리.</p>
+          <p>강원 강릉 상가 매장 철거 완료. 내부 인테리어 철거부터 폐기물 처리까지 원스톱으로 진행.</p>
         </div>
       </div>
-      <div class="log-item">
+      <div class="log-item" onclick="openLog(1)">
         <img src="gal-3.jpg?v=3" alt="시공사례2" loading="lazy" />
         <div class="log-body">
           <div class="log-meta">2026.06.24 · 강원 속초</div>
           <h3>속초 건물 해체 완료 — 중장비 투입 전체 철거</h3>
-          <p>강원 속초 노후 건물 전체 해체 시공 완료. 전문 중장비 직접 보유로 빠르고 안전하게 마무리. 폐기물 처리 증빙서류 100% 발행.</p>
+          <p>강원 속초 노후 건물 전체 해체 시공 완료. 전문 중장비 직접 보유로 빠르고 안전하게 마무리.</p>
         </div>
       </div>
-      <div class="log-item">
+      <div class="log-item" onclick="openLog(2)">
         <img src="gal-4.jpg?v=3" alt="시공사례3" loading="lazy" />
         <div class="log-body">
           <div class="log-meta">2026.06.22 · 강원 원주</div>
           <h3>원주 상가 인테리어 철거 — 폐업 원상복구 완료</h3>
-          <p>강원 원주 상가 폐업 철거 완료. 인테리어 전체 철거 및 폐기물 처리까지 당일 시공. 임대인 확인 후 원상복구 완료 증빙 제공.</p>
+          <p>강원 원주 상가 폐업 철거 완료. 인테리어 전체 철거 및 폐기물 처리까지 당일 시공.</p>
         </div>
       </div>
-      <div class="log-item">
+      <div class="log-item" onclick="openLog(3)">
         <img src="gal-5.jpg?v=3" alt="시공사례4" loading="lazy" />
         <div class="log-body">
           <div class="log-meta">2026.06.20 · 강원 동해</div>
           <h3>동해 상가 철거 완료 — 내부 전체 해체 시공</h3>
-          <p>강원 동해 상가 전체 철거 완료. 소음·분진 방지 조치 완벽 시행으로 민원 0건. 시간 약속 100% 엄수 후 깔끔하게 마무리.</p>
+          <p>강원 동해 상가 전체 철거 완료. 소음·분진 방지 조치 완벽 시행으로 민원 0건.</p>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- 시공후기 상세 모달 -->
+<div class="log-modal-overlay" id="logModal" onclick="closeLogModal(event)">
+  <div class="log-modal">
+    <button class="log-modal-back" onclick="closeLog()">← 목록</button>
+    <div class="log-modal-content">
+      <div class="log-meta" id="modalMeta"></div>
+      <h2 id="modalTitle"></h2>
+      <img id="modalImg" src="" alt="" />
+      <div class="log-detail" id="modalDetail"></div>
+      <a href="tel:010-2928-3614" class="log-modal-call">📞 시공 상담 010-2928-3614</a>
+    </div>
+  </div>
+</div>
   </div>
 </section>
 
@@ -637,6 +666,77 @@
 </div>
 
 <script>
+  const logData = [
+    {
+      meta: '2026.06.26 · 강원 강릉',
+      title: '강릉 상가 철거 완료 — 1층 전체 원상복구 시공',
+      img: 'gal-2.jpg?v=3',
+      detail: `오늘은 강원 강릉 상가 매장의 철거를 진행했습니다. 강릉 시내 중심가에 위치한 매장으로, 폐업 후 원상복구가 필요한 현장이었습니다.
+
+여비철거 전문 팀이 내부 인테리어 철거부터 폐기물 처리까지 원스톱으로 진행했습니다. 처음 견적 그대로 추가 비용 없이 깔끔하게 마무리했습니다.
+
+이번 현장에서는 무선 전동 장비를 활용해 소음을 최소화하고, 분진 방지 조치를 완벽히 시행하여 민원 0건으로 완료했습니다.
+
+여비철거는 세금계산서 및 폐기물 처리 확인서 등 모든 증빙서류를 100% 발행합니다. 전국 어디든 무료 출장 견적을 제공하며, 신규 상담 고객님께는 평균 4일 이내 방문 설치를 진행합니다.`
+    },
+    {
+      meta: '2026.06.24 · 강원 속초',
+      title: '속초 건물 해체 완료 — 중장비 투입 전체 철거',
+      img: 'gal-3.jpg?v=3',
+      detail: `강원 속초 노후 건물 전체 해체 시공을 완료했습니다. 대형 굴착기를 직접 보유하고 있어 빠르고 정밀한 작업이 가능했습니다.
+
+해체 과정에서 발생한 건설폐기물, 폐콘크리트 등은 모두 지자체 승인 폐기물 처리 허가에 따라 적법하게 처리했습니다.
+
+안전 펜스 설치 및 분진 방지 살수 작업을 병행하여 인근 민원 0건으로 안전하게 마무리했습니다.
+
+폐기물 처리 확인서 및 세금계산서를 100% 발행해드렸으며, 시간 약속 엄수로 고객님께서 매우 만족하셨습니다.`
+    },
+    {
+      meta: '2026.06.22 · 강원 원주',
+      title: '원주 상가 인테리어 철거 — 폐업 원상복구 완료',
+      img: 'gal-4.jpg?v=3',
+      detail: `강원 원주 상가 폐업 철거 및 원상복구 시공을 완료했습니다. 인테리어 전체 철거부터 바닥, 천장, 벽면 원상복구까지 당일 원스톱으로 진행했습니다.
+
+폐업지원금 컨설팅도 함께 제공하여 고객님께서 최대 700만원의 지원금 신청을 도울 수 있었습니다.
+
+임대인 확인 후 원상복구 완료 증빙을 즉시 제공하였으며, 추가 비용 없이 처음 견적 그대로 마무리했습니다.
+
+여비철거는 전국 어디든 무료 출장 견적을 제공합니다. 폐업을 앞두고 계신 사장님께서는 언제든지 연락 주세요.`
+    },
+    {
+      meta: '2026.06.20 · 강원 동해',
+      title: '동해 상가 철거 완료 — 내부 전체 해체 시공',
+      img: 'gal-5.jpg?v=3',
+      detail: `강원 동해 상가 내부 전체 철거 시공을 완료했습니다. 숙련된 전문 인력이 직접 시공하여 외주 없이 품질과 비용을 모두 잡았습니다.
+
+소음·분진 방지 조치를 철저히 준비하여 인근 상가 및 주민 민원 0건으로 깔끔하게 마무리했습니다.
+
+철거 후 발생한 모든 폐기물은 혼합폐기물 및 건설폐기물 기준에 따라 적법하게 처리하고 증빙서류를 발행했습니다.
+
+시간 약속 100% 엄수 — 약속한 날짜와 시간에 정확히 방문하여 고객님의 신뢰를 얻었습니다.`
+    }
+  ];
+
+  function openLog(idx) {
+    const d = logData[idx];
+    document.getElementById('modalMeta').textContent = d.meta;
+    document.getElementById('modalTitle').textContent = d.title;
+    document.getElementById('modalImg').src = d.img;
+    document.getElementById('modalImg').alt = d.title;
+    document.getElementById('modalDetail').textContent = d.detail;
+    document.getElementById('logModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLog() {
+    document.getElementById('logModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeLogModal(e) {
+    if (e.target === document.getElementById('logModal')) closeLog();
+  }
+
   async function submitForm() {
     const required = ['owner-name','owner-phone','store-name','store-address','store-size','close-date','detail'];
     for (const id of required) {
