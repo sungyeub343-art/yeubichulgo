@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>시공 후기 | 여비철거 — 전국상가철거 전문</title>
+  <meta name="description" content="여비철거가 직접 시공한 전국 상가철거·매장철거·간판철거·폐업지원금 현장 후기입니다. 카페, 음식점, 학원, 미용실, 헬스장, PC방, 노래방 등 다양한 업종 시공 기록." />
+  <meta name="keywords" content="상가철거 후기, 매장철거 후기, 간판철거, 폐업지원금, 철거지원금, 학원철거, 음식점철거, 카페철거, 미용실철거, 헬스장철거, PC방철거, 노래방철거, 옷가게철거, 꽃집철거, 여비철거" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --c-black:   #111111;
+      --c-charcoal:#2a2a2a;
+      --c-gray:    #6b6b6b;
+      --c-silver:  #d4d4d4;
+      --c-bg:      #f7f5f2;
+      --c-white:   #ffffff;
+      --c-accent:  #d04a02;
+      --c-accent2: #f26522;
+      --ff-display:"Noto Serif KR", serif;
+      --ff-body:   "Noto Sans KR", sans-serif;
+      --r:         8px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--ff-body); background: var(--c-bg); color: var(--c-charcoal); line-height: 1.7; }
+
+    /* ── HEADER ── */
+    header { position: sticky; top: 0; z-index: 100; background: var(--c-white); border-bottom: 1px solid var(--c-silver); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; }
+    .logo-text { font-family: var(--ff-display); font-size: 1.2rem; font-weight: 900; color: var(--c-black); text-decoration: none; }
+    .logo-text span { color: var(--c-accent); }
+    nav a { text-decoration: none; color: var(--c-charcoal); font-size: .85rem; font-weight: 600; margin-left: 1.4rem; transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--c-accent); }
+    .btn-header { background: var(--c-accent); color: #fff; border: none; border-radius: 4px; padding: .45rem 1rem; font-size: .82rem; font-weight: 700; cursor: pointer; margin-left: 1.6rem; text-decoration: none; }
+    .mobile-menu-btn { display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; }
+    .mobile-nav { display:none; position:fixed; inset:0; background:#fff; z-index:200; flex-direction:column; align-items:center; justify-content:center; gap:2rem; }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { font-size:1.1rem; font-weight:700; color:var(--c-charcoal); text-decoration:none; }
+    .mobile-nav-close { position:absolute; top:1.2rem; right:1.5rem; font-size:2rem; background:none; border:none; cursor:pointer; }
+    @media(max-width:768px){ nav{display:none;} .mobile-menu-btn{display:block;} }
+
+    /* ── PAGE HERO ── */
+    .page-hero { background: var(--c-black); color: #fff; padding: 3rem 2rem 2.5rem; }
+    .page-hero .container { max-width: 1060px; margin: 0 auto; }
+    .page-hero .eyebrow { font-size:.75rem; font-weight:700; letter-spacing:.12em; color:var(--c-accent2); text-transform:uppercase; margin-bottom:.6rem; }
+    .page-hero h1 { font-family: var(--ff-display); font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 900; }
+    .page-hero h1 em { color: var(--c-accent2); font-style: normal; }
+    .page-hero p { color: #aaa; font-size: .9rem; margin-top: .6rem; }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 1060px; margin: 0 auto; }
+    main { padding: 3rem 2rem; }
+
+    /* ── 후기 목록 ── */
+    .log-list { display: flex; flex-direction: column; gap: 1rem; }
+    .log-item { display: flex; gap: 1.4rem; background: var(--c-white); border-radius: var(--r); padding: 1.4rem; align-items: flex-start; cursor: pointer; transition: box-shadow .2s, transform .2s; border: 1px solid transparent; }
+    .log-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,.10); transform: translateY(-2px); border-color: var(--c-silver); }
+    .log-item img { width: 160px; height: 110px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+    .log-body { flex: 1; }
+    .log-meta { font-size: .75rem; font-weight: 700; color: var(--c-accent); margin-bottom: .4rem; }
+    .log-body h3 { font-size: 1rem; font-weight: 800; color: var(--c-black); margin-bottom: .5rem; line-height: 1.5; }
+    .log-body p { font-size: .83rem; color: var(--c-gray); line-height: 1.7; }
+    .log-arrow { font-size: 1rem; color: var(--c-silver); margin-left: auto; align-self: center; flex-shrink: 0; }
+    @media(max-width:640px){ .log-item{flex-direction:column;} .log-item img{width:100%;height:200px;} .log-arrow{display:none;} }
+
+    /* ── 상세 뷰 ── */
+    .detail-view { display: none; }
+    .detail-view.open { display: block; }
+    .list-view.hidden { display: none; }
+
+    .detail-back { display: inline-flex; align-items: center; gap: .4rem; font-size: .85rem; font-weight: 700; color: var(--c-charcoal); background: var(--c-white); border: 1px solid var(--c-silver); border-radius: 6px; padding: .5rem 1rem; cursor: pointer; margin-bottom: 1.6rem; font-family: var(--ff-body); transition: color .2s; }
+    .detail-back:hover { color: var(--c-accent); border-color: var(--c-accent); }
+
+    .detail-card { background: var(--c-white); border-radius: var(--r); overflow: hidden; max-width: 720px; }
+    .detail-card img { width: 100%; max-height: 400px; object-fit: cover; }
+    .detail-body { padding: 2rem; }
+    .detail-meta { font-size: .78rem; font-weight: 700; color: var(--c-accent); margin-bottom: .6rem; }
+    .detail-body h2 { font-family: var(--ff-display); font-size: 1.3rem; font-weight: 900; color: var(--c-black); line-height: 1.4; margin-bottom: 1.4rem; padding-bottom: 1rem; border-bottom: 1px solid var(--c-silver); }
+    .detail-text { font-size: .9rem; color: var(--c-charcoal); line-height: 2; white-space: pre-line; }
+    .detail-call { display: block; background: var(--c-accent); color: #fff; text-align: center; padding: 1rem; font-size: 1rem; font-weight: 800; text-decoration: none; border-radius: 8px; margin-top: 2rem; transition: background .2s; }
+    .detail-call:hover { background: #b03d00; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--c-charcoal); color: #aaa; padding: 2.5rem 2rem; margin-top: 2rem; }
+    .footer-bottom { max-width: 1060px; margin: 0 auto; font-size: .75rem; color: #666; text-align: center; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo-text">여<span>비</span>철거</a>
+  <nav>
+    <a href="index.html#about">회사소개</a>
+    <a href="index.html#services">사업영역</a>
+    <a href="index.html#process">시공절차</a>
+    <a href="index.html#why">선택이유</a>
+    <a href="index.html#subsidy">폐업지원금</a>
+    <a href="index.html#gallery">시공사례</a>
+    <a href="reviews.html" class="active">시공후기</a>
+    <a href="index.html#quote-form" class="btn-header">무료 견적 신청</a>
+  </nav>
+  <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-nav').classList.add('open')" aria-label="메뉴열기">☰</button>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close" onclick="document.querySelector('.mobile-nav').classList.remove('open')">✕</button>
+  <a href="index.html#about" onclick="document.querySelector('.mobile-nav').classList.remove('open')">회사소개</a>
+  <a href="index.html#services" onclick="document.querySelector('.mobile-nav').classList.remove('open')">사업영역</a>
+  <a href="index.html#process" onclick="document.querySelector('.mobile-nav').classList.remove('open')">시공절차</a>
+  <a href="index.html#why" onclick="document.querySelector('.mobile-nav').classList.remove('open')">선택이유</a>
+  <a href="index.html#subsidy" onclick="document.querySelector('.mobile-nav').classList.remove('open')">폐업지원금</a>
+  <a href="index.html#gallery" onclick="document.querySelector('.mobile-nav').classList.remove('open')">시공사례</a>
+  <a href="reviews.html" onclick="document.querySelector('.mobile-nav').classList.remove('open')" style="color:var(--c-accent);">시공후기</a>
+  <a href="index.html#quote-form" onclick="document.querySelector('.mobile-nav').classList.remove('open')" style="color:var(--c-accent);font-weight:900;">무료 견적 신청</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="eyebrow">시공 후기</div>
+    <h1>여비철거가 <em>직접 시공한</em> 현장 기록</h1>
+    <p>상가철거·매장철거·간판철거·폐업지원금 컨설팅까지 — 실제 시공 현장 기록입니다.</p>
+  </div>
+</div>
+
+<main>
+  <div class="container">
+
+    <!-- 목록 -->
+    <div class="list-view" id="listView">
+      <div class="log-list">
+        <div class="log-item" onclick="openDetail(0)">
+          <img src="gal-2.jpg?v=3" alt="강릉 카페 상가철거" loading="lazy" />
+          <div class="log-body">
+            <div class="log-meta">2026.06.26 · 강원 강릉</div>
+            <h3>강릉 카페·음식점 상가철거 완료 — 폐업지원금 컨설팅까지</h3>
+            <p>카페·식당 폐업 상가철거 및 간판철거 완료. 폐업지원금·철거지원금 컨설팅 포함 원스톱 진행.</p>
+          </div>
+          <div class="log-arrow">›</div>
+        </div>
+        <div class="log-item" onclick="openDetail(1)">
+          <img src="gal-3.jpg?v=3" alt="속초 학원 매장철거" loading="lazy" />
+          <div class="log-body">
+            <div class="log-meta">2026.06.24 · 강원 속초</div>
+            <h3>속초 학원·PC방 매장철거 — 간판철거 포함 전체 해체</h3>
+            <p>학원·PC방 폐업 매장철거 및 간판철거 완료. 철거지원금·폐업지원금 서류 지원 포함.</p>
+          </div>
+          <div class="log-arrow">›</div>
+        </div>
+        <div class="log-item" onclick="openDetail(2)">
+          <img src="gal-4.jpg?v=3" alt="원주 미용실 상가철거" loading="lazy" />
+          <div class="log-body">
+            <div class="log-meta">2026.06.22 · 강원 원주</div>
+            <h3>원주 미용실·헬스장 상가철거 — 폐업지원금 신청 완료</h3>
+            <p>미용실·헬스장 폐업 상가철거 완료. 폐업지원금·철거지원금 최대 700만원 신청 지원.</p>
+          </div>
+          <div class="log-arrow">›</div>
+        </div>
+        <div class="log-item" onclick="openDetail(3)">
+          <img src="gal-5.jpg?v=3" alt="동해 옷가게 상가철거" loading="lazy" />
+          <div class="log-body">
+            <div class="log-meta">2026.06.20 · 강원 동해</div>
+            <h3>동해 옷가게·꽃집·구두가게 상가철거 — 간판철거 일괄 처리</h3>
+            <p>옷가게·꽃집·구두가게 매장철거 및 간판철거 일괄 완료. 폐업지원금 안내 포함.</p>
+          </div>
+          <div class="log-arrow">›</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상세 뷰 -->
+    <div class="detail-view" id="detailView">
+      <button class="detail-back" onclick="closeDetail()">← 목록으로</button>
+      <div class="detail-card">
+        <img id="detailImg" src="" alt="" />
+        <div class="detail-body">
+          <div class="detail-meta" id="detailMeta"></div>
+          <h2 id="detailTitle"></h2>
+          <div class="detail-text" id="detailText"></div>
+          <a href="index.html#quote-form" class="detail-call">📋 무료 견적 신청하기</a>
+          <a href="tel:010-2928-3614" class="detail-call" style="margin-top:.8rem;background:var(--c-charcoal);">📞 시공 상담 010-2928-3614</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-bottom">
+    © 2026 여비철거. All Rights Reserved. | 사업자등록번호 : 748-66-00597
+  </div>
+</footer>
+
+<script>
+  const reviews = [
+    {
+      meta: '2026.06.26 · 강원 강릉',
+      title: '강릉 카페·음식점 상가철거 완료 — 폐업지원금 컨설팅까지',
+      img: 'gal-2.jpg?v=3',
+      text: `강원 강릉 시내에 위치한 카페 및 음식점 상가철거를 완료했습니다. 오랜 기간 운영하시던 카페와 식당을 폐업하시면서 매장철거와 원상복구가 필요하셨던 현장입니다.
+
+여비철거 전문 팀이 내부 인테리어 철거는 물론, 외부 간판철거까지 원스톱으로 진행했습니다. 카페 특성상 대형 주방 설비와 인테리어 자재가 많았지만, 숙련된 팀이 신속하게 철거를 마무리했습니다.
+
+폐업지원금 및 철거지원금 컨설팅도 함께 제공하여 고객님께서 정부 지원금 최대 700만원 신청을 수월하게 진행하실 수 있도록 도와드렸습니다.
+
+학원, 음식점, 카페 등 어떤 업종의 상가철거도 여비철거가 책임지고 처리해드립니다. 처음 견적 그대로, 추가 비용 없이 깔끔하게 마무리했습니다.`
+    },
+    {
+      meta: '2026.06.24 · 강원 속초',
+      title: '속초 학원·PC방 매장철거 — 간판철거 포함 전체 해체',
+      img: 'gal-3.jpg?v=3',
+      text: `강원 속초에 위치한 학원 및 PC방 건물 전체 매장철거 시공을 완료했습니다. 2개 층에 걸쳐 운영되던 학원과 PC방을 폐업하시면서 전체 해체가 필요한 대형 현장이었습니다.
+
+외부 간판철거부터 내부 파티션, 천장, 바닥재 철거까지 모두 직접 진행했습니다. 대형 굴착기를 직접 보유하고 있어 외주 없이 빠르고 정밀한 작업이 가능했습니다.
+
+철거지원금 및 폐업지원금 관련 서류 준비도 함께 도와드렸으며, 지자체 승인 폐기물 처리 허가에 따라 모든 폐기물을 적법하게 처리하고 증빙서류를 100% 발행했습니다.
+
+PC방, 학원, 노래방 등 특수 시설 매장철거도 여비철거라면 걱정 없습니다. 안전 펜스 설치 및 분진 방지 작업으로 민원 0건 달성했습니다.`
+    },
+    {
+      meta: '2026.06.22 · 강원 원주',
+      title: '원주 미용실·헬스장 상가철거 — 폐업지원금 신청 완료',
+      img: 'gal-4.jpg?v=3',
+      text: `강원 원주 상가 건물 내 미용실과 헬스장 폐업 철거 및 원상복구 시공을 완료했습니다. 미용실 특수 배관과 헬스장 대형 운동기구 해체 등 전문 장비가 필요한 현장이었습니다.
+
+매장철거와 함께 외부 간판철거도 동시에 진행하여 고객님의 시간을 절약해드렸습니다. 노래방, 헬스장처럼 특수 설비가 많은 매장도 여비철거 전문 팀이 안전하게 처리합니다.
+
+폐업지원금 및 철거지원금 컨설팅을 통해 정부지원금 최대 600만원, 지자체 지원금 최대 100만원 신청을 도와드렸습니다. 고객님께서 예상보다 많은 지원금을 받으셔서 매우 만족해하셨습니다.
+
+미용실, 헬스장, 옷가게 등 업종에 관계없이 전국 어디든 무료 출장 견적을 제공합니다. 임대인 확인 후 원상복구 완료 증빙을 즉시 발행해드렸습니다.`
+    },
+    {
+      meta: '2026.06.20 · 강원 동해',
+      title: '동해 옷가게·꽃집·구두가게 상가철거 — 간판철거 일괄 처리',
+      img: 'gal-5.jpg?v=3',
+      text: `강원 동해 상가 건물 내 옷가게, 꽃집, 구두가게 등 소형 매장 3곳을 동시에 철거했습니다. 건물 리모델링을 앞두고 1층 전체 상가철거가 필요한 현장이었습니다.
+
+각 매장의 간판철거부터 내부 인테리어, 집기, 진열대 철거까지 하루 만에 일괄 처리했습니다. 옷가게의 행거 시스템, 꽃집의 냉장 설비, 구두가게의 진열장 등 다양한 시설을 전문적으로 해체했습니다.
+
+폐업지원금 및 철거지원금 안내를 통해 각 매장 사장님들이 지원금을 신청하실 수 있도록 도와드렸습니다. 소음·분진 방지 조치를 철저히 시행하여 인근 식당, 상가 주민 민원 0건으로 마무리했습니다.
+
+혼합폐기물 및 건설폐기물 모두 적법하게 처리하고 세금계산서와 폐기물 처리 확인서를 100% 발행했습니다. 시간 약속 100% 엄수로 고객님들의 신뢰를 얻었습니다.`
+    }
+  ];
+
+  function openDetail(idx) {
+    const r = reviews[idx];
+    document.getElementById('detailImg').src = r.img;
+    document.getElementById('detailImg').alt = r.title;
+    document.getElementById('detailMeta').textContent = r.meta;
+    document.getElementById('detailTitle').textContent = r.title;
+    document.getElementById('detailText').textContent = r.text;
+    document.getElementById('listView').classList.add('hidden');
+    document.getElementById('detailView').classList.add('open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function closeDetail() {
+    document.getElementById('detailView').classList.remove('open');
+    document.getElementById('listView').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
