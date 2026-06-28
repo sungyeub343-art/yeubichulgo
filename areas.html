@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>지역별 상가철거 서비스 | 여비철거</title>
+  <meta name="description" content="전국 17개 시도, 250개 시·군·구 상가철거·매장철거·간판철거·마루철거·폐기물처리·폐업지원금 서비스. 지역을 선택하면 해당 지역 전문 서비스를 안내해 드립니다." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --c-black:   #111111;
+      --c-charcoal:#2a2a2a;
+      --c-gray:    #6b6b6b;
+      --c-silver:  #d4d4d4;
+      --c-bg:      #f7f5f2;
+      --c-white:   #ffffff;
+      --c-accent:  #d04a02;
+      --c-accent2: #f26522;
+      --ff-display:"Noto Serif KR", serif;
+      --ff-body:   "Noto Sans KR", sans-serif;
+      --r: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--ff-body); background: var(--c-bg); color: var(--c-charcoal); line-height: 1.7; min-height: 100vh; }
+
+    /* ── HEADER ── */
+    header { position: sticky; top: 0; z-index: 100; background: var(--c-white); border-bottom: 1px solid var(--c-silver); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; }
+    .logo-text { font-family: var(--ff-display); font-size: 1.2rem; font-weight: 900; color: var(--c-black); text-decoration: none; }
+    .logo-text span { color: var(--c-accent); }
+    nav a { text-decoration: none; color: var(--c-charcoal); font-size: .85rem; font-weight: 600; margin-left: 1.4rem; transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--c-accent); }
+    .btn-header { background: var(--c-accent); color: #fff; border: none; border-radius: 4px; padding: .45rem 1rem; font-size: .82rem; font-weight: 700; cursor: pointer; margin-left: 1.6rem; text-decoration: none; }
+    .mobile-menu-btn { display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; }
+    .mobile-nav { display:none; position:fixed; inset:0; background:#fff; z-index:200; flex-direction:column; align-items:center; justify-content:center; gap:2rem; }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { font-size:1.1rem; font-weight:700; color:var(--c-charcoal); text-decoration:none; }
+    .mobile-nav-close { position:absolute; top:1.2rem; right:1.5rem; font-size:2rem; background:none; border:none; cursor:pointer; }
+    @media(max-width:768px){ nav{display:none;} .mobile-menu-btn{display:block;} }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── PAGE HERO ── */
+    .page-hero { background: var(--c-black); color: #fff; padding: 3.5rem 2rem; text-align: center; }
+    .page-hero .divider { display: flex; align-items: center; gap: 1rem; justify-content: center; font-size: .78rem; color: #888; margin-bottom: 1rem; }
+    .page-hero .divider::before, .page-hero .divider::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: #555; }
+    .page-hero h1 { font-family: var(--ff-display); font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 900; line-height: 1.3; }
+    .page-hero h1 em { color: var(--c-accent2); font-style: normal; }
+    .page-hero p { color: #aaa; font-size: .9rem; margin-top: .8rem; }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb { padding: 1rem 0; font-size: .8rem; color: var(--c-gray); display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--c-gray); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--c-accent); }
+    .breadcrumb .sep { color: var(--c-silver); }
+    .breadcrumb .current { color: var(--c-accent); font-weight: 700; }
+
+    /* ── VIEWS ── */
+    #app { padding: 2.5rem 1.5rem 4rem; }
+
+    /* ── 시도 GRID ── */
+    .sido-section-label { text-align: center; font-size: .78rem; font-weight: 700; color: var(--c-gray); margin-bottom: 1.2rem; letter-spacing: .06em; }
+    .sido-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 860px; margin: 0 auto; }
+    @media(max-width:640px){ .sido-grid { grid-template-columns: repeat(2, 1fr); } }
+    .sido-card { background: var(--c-white); border: 1.5px solid var(--c-silver); border-radius: var(--r); padding: 1.6rem 1rem; text-align: center; cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .15s; }
+    .sido-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 18px rgba(208,74,2,.12); transform: translateY(-3px); }
+    .sido-card .icon { font-size: 2rem; margin-bottom: .6rem; }
+    .sido-card .name { font-size: 1rem; font-weight: 800; color: var(--c-black); }
+    .sido-card .count { font-size: .72rem; color: var(--c-gray); margin-top: .2rem; }
+
+    /* ── 시군구 LIST ── */
+    .back-btn { display: inline-flex; align-items: center; gap: .4rem; font-size: .85rem; font-weight: 700; color: var(--c-charcoal); background: var(--c-white); border: 1px solid var(--c-silver); border-radius: 6px; padding: .5rem 1rem; cursor: pointer; margin-bottom: 1.6rem; font-family: var(--ff-body); transition: color .2s, border-color .2s; text-decoration: none; }
+    .back-btn:hover { color: var(--c-accent); border-color: var(--c-accent); }
+    .sigungu-header { margin-bottom: 1.6rem; }
+    .sigungu-header h2 { font-family: var(--ff-display); font-size: 1.4rem; font-weight: 900; }
+    .sigungu-header h2 span { color: var(--c-accent); }
+    .sigungu-header p { font-size: .85rem; color: var(--c-gray); margin-top: .3rem; }
+    .sigungu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; }
+    @media(max-width:640px){ .sigungu-grid { grid-template-columns: repeat(2, 1fr); } }
+    .sigungu-card { background: var(--c-white); border: 1px solid var(--c-silver); border-radius: 8px; padding: 1rem .8rem; text-align: center; cursor: pointer; transition: border-color .2s, background .2s, transform .15s; }
+    .sigungu-card:hover { border-color: var(--c-accent); background: #fff8f5; transform: translateY(-2px); }
+    .sigungu-card .sg-name { font-size: .92rem; font-weight: 800; color: var(--c-black); }
+    .sigungu-card .sg-label { font-size: .72rem; color: var(--c-accent); margin-top: .2rem; font-weight: 600; }
+
+    /* ── DETAIL PAGE ── */
+    .detail-hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; border-radius: 12px; padding: 2.5rem 2rem; text-align: center; margin-bottom: 2rem; position: relative; overflow: hidden; }
+    .detail-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(208,74,2,.15) 0%, transparent 70%); }
+    .detail-hero .d-badge { display: inline-block; background: var(--c-accent); color: #fff; font-size: .72rem; font-weight: 700; padding: .28rem .9rem; border-radius: 20px; margin-bottom: 1rem; position: relative; }
+    .detail-hero h1 { font-family: var(--ff-display); font-size: clamp(1.4rem,3vw,2rem); font-weight: 900; position: relative; }
+    .detail-hero .d-sub { color: #aaa; font-size: .82rem; margin-top: .5rem; position: relative; }
+    .detail-hero .d-free { color: var(--c-accent2); font-size: .85rem; font-weight: 700; margin-top: .4rem; position: relative; }
+    .detail-hero .d-loc { color: #888; font-size: .78rem; margin-top: .3rem; position: relative; }
+
+    .detail-intro { text-align: center; margin-bottom: 2rem; padding: 0 1rem; }
+    .detail-intro p { font-size: .9rem; color: var(--c-charcoal); line-height: 2; }
+
+    .detail-btns { display: flex; gap: .8rem; justify-content: center; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .detail-btns a { display: inline-flex; align-items: center; gap: .4rem; padding: .8rem 1.8rem; border-radius: 6px; font-size: .9rem; font-weight: 800; text-decoration: none; transition: opacity .2s; }
+    .btn-primary { background: var(--c-black); color: #fff; }
+    .btn-outline { border: 2px solid var(--c-charcoal); color: var(--c-charcoal); }
+    .btn-primary:hover, .btn-outline:hover { opacity: .8; }
+
+    .detail-services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    @media(max-width:640px){ .detail-services { grid-template-columns: 1fr 1fr; } }
+    .service-chip { background: var(--c-white); border: 1px solid var(--c-silver); border-radius: 8px; padding: 1rem; text-align: center; }
+    .service-chip .chip-icon { font-size: 1.4rem; margin-bottom: .3rem; }
+    .service-chip .chip-name { font-size: .82rem; font-weight: 700; color: var(--c-black); }
+
+    .detail-desc { background: var(--c-white); border-radius: var(--r); padding: 2rem; margin-bottom: 1.5rem; font-size: .9rem; line-height: 2.1; color: var(--c-charcoal); }
+    .detail-desc h3 { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 900; color: var(--c-black); margin-bottom: .8rem; }
+
+    .detail-cta { background: var(--c-accent); color: #fff; border-radius: var(--r); padding: 2rem; text-align: center; }
+    .detail-cta h3 { font-family: var(--ff-display); font-size: 1.15rem; font-weight: 900; margin-bottom: .5rem; }
+    .detail-cta p { font-size: .85rem; opacity: .85; margin-bottom: 1.2rem; }
+    .detail-cta a { display: inline-block; background: #fff; color: var(--c-accent); font-weight: 800; font-size: .95rem; padding: .8rem 2rem; border-radius: 6px; text-decoration: none; margin: .3rem; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--c-charcoal); color: #aaa; padding: 2rem; }
+    .footer-bottom { max-width: 1060px; margin: 0 auto; font-size: .75rem; color: #666; text-align: center; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo-text">여<span>비</span>철거</a>
+  <nav>
+    <a href="index.html#about">회사소개</a>
+    <a href="index.html#services">사업영역</a>
+    <a href="index.html#gallery">시공사례</a>
+    <a href="reviews.html">시공후기</a>
+    <a href="areas.html" class="active">지역별 서비스</a>
+    <a href="index.html#quote-form" class="btn-header">무료 견적 신청</a>
+  </nav>
+  <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-nav').classList.add('open')" aria-label="메뉴열기">☰</button>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close" onclick="document.querySelector('.mobile-nav').classList.remove('open')">✕</button>
+  <a href="index.html#about" onclick="document.querySelector('.mobile-nav').classList.remove('open')">회사소개</a>
+  <a href="index.html#services" onclick="document.querySelector('.mobile-nav').classList.remove('open')">사업영역</a>
+  <a href="index.html#gallery" onclick="document.querySelector('.mobile-nav').classList.remove('open')">시공사례</a>
+  <a href="reviews.html" onclick="document.querySelector('.mobile-nav').classList.remove('open')">시공후기</a>
+  <a href="areas.html" onclick="document.querySelector('.mobile-nav').classList.remove('open')" style="color:var(--c-accent);">지역별 서비스</a>
+  <a href="index.html#quote-form" onclick="document.querySelector('.mobile-nav').classList.remove('open')" style="color:var(--c-accent);font-weight:900;">무료 견적 신청</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="divider">우리 동네 찾기</div>
+  <h1>시도 → 시·군·구까지<br><em>한 번에 찾아보세요.</em></h1>
+  <p>지역을 선택하면 해당 지역 상가철거 전문 서비스를 바로 안내해 드립니다.</p>
+</div>
+
+<div id="app">
+  <div class="container">
+    <div id="breadcrumb" class="breadcrumb"></div>
+    <div id="view"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">© 2026 여비철거. All Rights Reserved. | 사업자등록번호 : 748-66-00597</div>
+</footer>
+
+<script>
+const SIDO = [
+  { id:'seoul',   name:'서울',  icon:'🏙️', count:'25개 시·군·구',
+    list:['강남구','강동구','강북구','강서구','관악구','광진구','구로구','금천구','노원구','도봉구','동대문구','동작구','마포구','서대문구','서초구','성동구','성북구','송파구','양천구','영등포구','용산구','은평구','종로구','중구','중랑구'] },
+  { id:'gyeonggi',name:'경기',  icon:'🌿', count:'31개 시·군·구',
+    list:['가평군','고양시','과천시','광명시','광주시','구리시','군포시','김포시','남양주시','동두천시','부천시','성남시','수원시','시흥시','안산시','안성시','안양시','양주시','양평군','여주시','연천군','오산시','용인시','의왕시','의정부시','이천시','파주시','평택시','포천시','하남시','화성시'] },
+  { id:'incheon', name:'인천',  icon:'✈️', count:'10개 시·군·구',
+    list:['강화군','계양구','남동구','동구','미추홀구','부평구','서구','연수구','옹진군','중구'] },
+  { id:'busan',   name:'부산',  icon:'⚓', count:'16개 시·군·구',
+    list:['강서구','금정구','기장군','남구','동구','동래구','부산진구','북구','사상구','사하구','서구','수영구','연제구','영도구','중구','해운대구'] },
+  { id:'daegu',   name:'대구',  icon:'🏛️', count:'9개 시·군·구',
+    list:['군위군','남구','달서구','달성군','동구','북구','서구','수성구','중구'] },
+  { id:'daejeon', name:'대전',  icon:'🌆', count:'5개 시·군·구',
+    list:['대덕구','동구','서구','유성구','중구'] },
+  { id:'gwangju', name:'광주',  icon:'🌸', count:'5개 시·군·구',
+    list:['광산구','남구','동구','북구','서구'] },
+  { id:'ulsan',   name:'울산',  icon:'🔧', count:'5개 시·군·구',
+    list:['남구','동구','북구','울주군','중구'] },
+  { id:'sejong',  name:'세종',  icon:'🏗️', count:'1개 시·군·구',
+    list:['세종특별자치시'] },
+  { id:'gangwon', name:'강원',  icon:'🏔️', count:'18개 시·군·구',
+    list:['강릉시','고성군','동해시','삼척시','속초시','양구군','양양군','영월군','원주시','인제군','정선군','철원군','춘천시','태백시','평창군','홍천군','화천군','횡성군'] },
+  { id:'chungbuk',name:'충북',  icon:'🌻', count:'11개 시·군·구',
+    list:['괴산군','단양군','보은군','영동군','옥천군','음성군','제천시','증평군','진천군','청주시','충주시'] },
+  { id:'chungnam',name:'충남',  icon:'🌾', count:'15개 시·군·구',
+    list:['계룡시','공주시','금산군','논산시','당진시','보령시','부여군','서산시','서천군','아산시','예산군','천안시','청양군','태안군','홍성군'] },
+  { id:'jeonbuk', name:'전북',  icon:'🥬', count:'14개 시·군·구',
+    list:['고창군','군산시','김제시','남원시','무주군','부안군','순창군','완주군','익산시','임실군','장수군','전주시','정읍시','진안군'] },
+  { id:'jeonnam', name:'전남',  icon:'🌊', count:'22개 시·군·구',
+    list:['강진군','고흥군','곡성군','광양시','구례군','나주시','담양군','목포시','무안군','보성군','순천시','신안군','여수시','영광군','영암군','완도군','장성군','장흥군','진도군','함평군','해남군','화순군'] },
+  { id:'gyeongbuk',name:'경북', icon:'🍎', count:'22개 시·군·구',
+    list:['경산시','경주시','고령군','구미시','김천시','문경시','봉화군','상주시','성주군','안동시','영덕군','영양군','영주시','영천시','예천군','울릉군','울진군','의성군','청도군','청송군','칠곡군','포항시'] },
+  { id:'gyeongnam',name:'경남', icon:'🌿', count:'18개 시·군·구',
+    list:['거제시','거창군','고성군','김해시','남해군','밀양시','사천시','산청군','양산시','의령군','진주시','창녕군','창원시','통영시','하동군','함안군','함양군','합천군'] },
+  { id:'jeju',    name:'제주',  icon:'🌺', count:'2개 시·군·구',
+    list:['서귀포시','제주시'] },
+];
+
+function getSido(id) { return SIDO.find(s => s.id === id); }
+
+function renderSido() {
+  document.getElementById('breadcrumb').innerHTML =
+    `<a href="areas.html">지역별 서비스</a>`;
+
+  const grid = SIDO.map(s => `
+    <div class="sido-card" onclick="go('${s.id}')">
+      <div class="icon">${s.icon}</div>
+      <div class="name">${s.name}</div>
+      <div class="count">${s.count}</div>
+    </div>`).join('');
+
+  document.getElementById('view').innerHTML = `
+    <div class="sido-section-label">1. 시·도를 선택하세요</div>
+    <div class="sido-grid">${grid}</div>`;
+
+  document.title = '지역별 상가철거 서비스 | 여비철거';
+}
+
+function renderSigungu(sidoId) {
+  const sido = getSido(sidoId);
+  if (!sido) { renderSido(); return; }
+
+  document.getElementById('breadcrumb').innerHTML =
+    `<a href="areas.html">지역별 서비스</a>
+     <span class="sep">›</span>
+     <span class="current">${sido.name}</span>`;
+
+  const cards = sido.list.map(sg => `
+    <div class="sigungu-card" onclick="go('${sidoId}/${encodeURIComponent(sg)}')">
+      <div class="sg-name">${sg}</div>
+      <div class="sg-label">상가철거 보기</div>
+    </div>`).join('');
+
+  document.getElementById('view').innerHTML = `
+    <button class="back-btn" onclick="go('')">← 시도 선택으로</button>
+    <div class="sigungu-header">
+      <h2>${sido.icon} <span>${sido.name}</span> 지역 상가철거</h2>
+      <p>시·군·구를 선택하면 해당 지역 전문 서비스를 안내해 드립니다.</p>
+    </div>
+    <div class="sigungu-grid">${cards}</div>`;
+
+  document.title = `${sido.name} 상가철거 | 여비철거`;
+}
+
+function renderDetail(sidoId, sgName) {
+  const sido = getSido(sidoId);
+  if (!sido) { renderSido(); return; }
+  const name = decodeURIComponent(sgName);
+
+  document.getElementById('breadcrumb').innerHTML =
+    `<a href="areas.html">지역별 서비스</a>
+     <span class="sep">›</span>
+     <a href="#${sidoId}">${sido.name}</a>
+     <span class="sep">›</span>
+     <span class="current">${name}</span>`;
+
+  document.getElementById('view').innerHTML = `
+    <button class="back-btn" onclick="go('${sidoId}')">← ${sido.name} 목록으로</button>
+
+    <div class="detail-hero">
+      <div class="d-badge">상가철거 전문</div>
+      <h1>${name} 상가철거 가이드</h1>
+      <div class="d-sub">매장철거 · 간판철거 · 마루철거 · 폐기물처리</div>
+      <div class="d-free">출장비 무료 · 견적비 무료</div>
+      <div class="d-loc">${sido.name} ${name} · 상가철거 전문 출장 서비스</div>
+    </div>
+
+    <div class="detail-intro">
+      <p>${name}에서 상가철거를 고민 중이신가요?<br>
+      여비철거가 ${name} 전 지역 상가철거·매장철거·간판철거·마루철거·<br>폐기물처리·폐기물수거·폐업지원금 컨설팅을 원스톱으로 제공합니다.</p>
+    </div>
+
+    <div class="detail-btns">
+      <a href="index.html#quote-form" class="btn-primary">📋 무료 견적 신청 →</a>
+      <a href="tel:010-2928-3614" class="btn-outline">☎ 전화 문의 ↗</a>
+    </div>
+
+    <div class="detail-services">
+      <div class="service-chip"><div class="chip-icon">🏗️</div><div class="chip-name">상가철거</div></div>
+      <div class="service-chip"><div class="chip-icon">🏪</div><div class="chip-name">매장철거</div></div>
+      <div class="service-chip"><div class="chip-icon">🪧</div><div class="chip-name">간판철거</div></div>
+      <div class="service-chip"><div class="chip-icon">🪵</div><div class="chip-name">마루철거</div></div>
+      <div class="service-chip"><div class="chip-icon">🗑️</div><div class="chip-name">폐기물처리</div></div>
+      <div class="service-chip"><div class="chip-icon">💰</div><div class="chip-name">폐업지원금</div></div>
+    </div>
+
+    <div class="detail-desc">
+      <h3>${name} 상가철거 전문 여비철거</h3>
+      <p>${name}에서 폐업을 결정하셨다면, 상가철거부터 폐업지원금 신청까지 여비철거가 책임지고 도와드립니다.</p>
+      <br>
+      <p>카페, 음식점, 식당, 학원, 미용실, 헬스장, PC방, 노래방, 옷가게, 꽃집, 구두가게 등 업종에 관계없이 ${name} 어디든 출장 가능합니다. 대형 굴착기를 직접 보유하고 있어 외주 없이 빠르고 정밀한 작업이 가능하며, 처음 견적 그대로 추가 비용 없이 마무리합니다.</p>
+      <br>
+      <p>간판철거·마루철거·인테리어철거·폐기물처리·폐기물수거까지 한 번에 해결하고, 모든 폐기물은 지자체 허가 절차에 따라 적법하게 처리하여 세금계산서와 폐기물 처리 확인서를 100% 발행합니다.</p>
+      <br>
+      <p>폐업지원금·철거지원금은 정부 지원금 최대 700만원까지 신청 가능합니다. 여비철거가 서류 준비부터 신청까지 무료로 안내해 드립니다. ${sido.name} ${name} 상가철거, 지금 바로 무료 견적을 받아보세요.</p>
+    </div>
+
+    <div class="detail-cta">
+      <h3>${name} 상가철거 무료 견적</h3>
+      <p>지금 신청하시면 당일 방문 견적 가능 · 출장비 무료 · 추가 비용 없음</p>
+      <a href="index.html#quote-form">📋 무료 견적 신청</a>
+      <a href="tel:010-2928-3614">📞 010-2928-3614</a>
+    </div>`;
+
+  document.title = `${name} 상가철거 | 여비철거`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function go(hash) {
+  location.hash = hash;
+}
+
+function route() {
+  const hash = decodeURIComponent(location.hash.replace('#', ''));
+  if (!hash) { renderSido(); return; }
+  const parts = hash.split('/');
+  if (parts.length === 1) { renderSigungu(parts[0]); }
+  else if (parts.length >= 2) { renderDetail(parts[0], parts.slice(1).join('/')); }
+  else { renderSido(); }
+}
+
+window.addEventListener('hashchange', route);
+window.addEventListener('DOMContentLoaded', route);
+</script>
+
+</body>
+</html>
