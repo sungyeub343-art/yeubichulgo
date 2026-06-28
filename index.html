@@ -165,17 +165,6 @@
     .log-modal-content .log-detail { font-size:.88rem; color:var(--c-charcoal); line-height:1.9; white-space:pre-line; }
     .log-modal-call { display:block; width:100%; background:var(--c-accent); color:#fff; text-align:center; padding:1rem; font-size:1rem; font-weight:800; text-decoration:none; border-radius:8px; margin-top:1.8rem; font-family:var(--ff-body); }
 
-    /* ── REVIEWS ── */
-    #reviews { background:var(--c-white); }
-    .reviews-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem; margin-top:3rem; }
-    .review-card { background:var(--c-bg); border-radius:var(--r); padding:1.6rem; }
-    .review-card .stars { color:#f59e0b; font-size:.9rem; }
-    .review-card .tag { display:inline-block; background:var(--c-accent); color:#fff; font-size:.68rem; font-weight:700; padding:.15rem .5rem; border-radius:3px; margin-left:.4rem; vertical-align:middle; }
-    .review-card blockquote { font-size:.88rem; color:var(--c-charcoal); margin:.8rem 0; font-weight:600; }
-    .review-card p { font-size:.8rem; color:var(--c-gray); }
-    .review-meta { font-size:.75rem; color:var(--c-silver); margin-top:.6rem; }
-    @media(max-width:640px){ .reviews-grid{grid-template-columns:1fr;} }
-
     /* ── FAQ ── */
     #faq { background:var(--c-bg); }
     .faq-list { margin-top:2.5rem; display:flex; flex-direction:column; gap:.8rem; max-width:760px; }
@@ -278,7 +267,6 @@
     <a href="#gallery">시공사례</a>
     <a href="reviews.html">시공후기</a>
     <a href="areas.html">지역별 서비스</a>
-    <a href="#reviews">고객후기</a>
     <a href="#quote-form" class="btn-header">무료 견적 신청</a>
   </nav>
   <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-nav').classList.add('open')" aria-label="메뉴열기">☰</button>
@@ -510,41 +498,6 @@
     </div>
   </div>
 </div>
-  </div>
-</section>
-
-<!-- REVIEWS -->
-<section id="reviews">
-  <div class="container">
-    <div class="section-eyebrow">고객 후기</div>
-    <h2 class="section-title">직접 경험한 <em>실제 후기</em></h2>
-    <p class="section-lead">가감 없는 고객님들의 솔직한 후기입니다. 모든 후기는 시공 완료 후 작성되었습니다.</p>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div><span class="stars">★★★★★</span><span class="tag">철거 공사</span></div>
-        <blockquote>"전문 팀이 직접 와서 확실히 불안하지 않았어요"</blockquote>
-        <p>외부 업체 없이 직접 팀이 와서 철거하니까 안심이 됐어요. 진행 상황을 계속 알려줘서 불안함이 전혀 없었습니다. 임대인도 만족했어요.</p>
-        <div class="review-meta">🏪 성남시 XX구 카페 사장님 · 2024.11</div>
-      </div>
-      <div class="review-card">
-        <div><span class="stars">★★★★★</span><span class="tag">폐기물 처리</span></div>
-        <blockquote>"견적 받은 금액 그대로 — 추가 비용 없이 마무리"</blockquote>
-        <p>다른 업체는 나중에 폐기물 처리비를 추가로 청구해서 황당했는데, 이곳은 처음 견적 그대로였습니다. 투명하고 믿을 수 있는 업체입니다.</p>
-        <div class="review-meta">🎓 고양시 학원 사장님 · 2024.10</div>
-      </div>
-      <div class="review-card">
-        <div><span class="stars">★★★★★</span><span class="tag">철거 공사</span></div>
-        <blockquote>"민원 걱정이 있었는데, 사전 준비가 완벽했어요"</blockquote>
-        <p>소음과 분진 때문에 이웃 민원이 걱정됐는데, 방음 조치와 청소까지 완벽하게 준비해서 민원 0건으로 깔끔하게 마무리했습니다.</p>
-        <div class="review-meta">🍽️ 안양시 음식점 사장님 · 2024.10</div>
-      </div>
-      <div class="review-card">
-        <div><span class="stars">★★★★★</span><span class="tag">원상복구</span></div>
-        <blockquote>"폐업지원금 컨설팅까지 맘이 편했어요"</blockquote>
-        <p>행정업무까지 너무 잘 알려주셔서 수월하게 원상복구 했네요. 감사합니다.</p>
-        <div class="review-meta">🏢 서울 강남구 의뢰인 · 2024.09</div>
-      </div>
-    </div>
   </div>
 </section>
 
