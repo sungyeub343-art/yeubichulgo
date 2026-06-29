@@ -562,6 +562,11 @@ function drawNationalMap(containerId) {
   });
 }
 
+function getParentCity(name) {
+  const m = name.match(/^(.+[시군])\s*.+구$/);
+  return m ? m[1] : name;
+}
+
 function drawProvinceMap(containerId, sidoId) {
   if (!geoData) return;
   const code = SIDO_CODE[sidoId];
@@ -569,9 +574,58 @@ function drawProvinceMap(containerId, sidoId) {
   const all = topojson.feature(geoData.municipalities, geoData.municipalities.objects['municipalities-geo']).features;
   const features = all.filter(f => String(f.properties.code).startsWith(code));
   if (!features.length) return;
-  drawMap(containerId, features, 420, d => {
-    const entry = topoNameToSidoEntry(sidoId, d.properties.name);
-    if (entry) go(`${sidoId}/${encodeURIComponent(entry)}`);
+
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const h = 420;
+  el.style.height = h + 'px';
+  el.innerHTML = '';
+  const w = el.offsetWidth || 400;
+
+  const proj = d3.geoMercator().fitExtent([[20,20],[w-20,h-20]], {type:'FeatureCollection',features});
+  const path = d3.geoPath(proj);
+
+  const svg = d3.select(el).append('svg')
+    .attr('width','100%').attr('height','100%')
+    .attr('viewBox',`0 0 ${w} ${h}`).style('display','block');
+
+  // Group features by parent city (합치기: 수원시장안구 → 수원시)
+  const groups = {};
+  features.forEach(f => {
+    const parent = getParentCity(f.properties.name);
+    if (!groups[parent]) groups[parent] = [];
+    groups[parent].push(f);
+  });
+
+  // Draw paths
+  const sido = getSido(sidoId);
+  svg.selectAll('path.prov')
+    .data(features).enter().append('path')
+    .attr('class','prov').attr('d', path)
+    .on('click', (_, d) => {
+      const parent = getParentCity(d.properties.name);
+      const subGu = sido ? sido.list.filter(s => s.startsWith(parent+' ')) : [];
+      if (subGu.length > 0) {
+        go(`${sidoId}/${encodeURIComponent(parent)}`);
+      } else {
+        const entry = topoNameToSidoEntry(sidoId, d.properties.name);
+        if (entry) go(`${sidoId}/${encodeURIComponent(entry)}`);
+      }
+    });
+
+  // Label: 그룹당 1개만 (중심 평균)
+  Object.entries(groups).forEach(([parent, gFeatures]) => {
+    const cs = gFeatures.map(f => path.centroid(f)).filter(c => !isNaN(c[0]));
+    if (!cs.length) return;
+    const cx = cs.reduce((s,c)=>s+c[0],0)/cs.length;
+    const cy = cs.reduce((s,c)=>s+c[1],0)/cs.length;
+    const bounds = gFeatures.map(f => path.bounds(f));
+    const bw = Math.max(...bounds.map(b=>b[1][0]-b[0][0]));
+    if (bw < 12) return;
+    svg.append('text').attr('class','prov-txt')
+      .attr('x',cx).attr('y',cy)
+      .attr('font-size', Math.min(12, Math.max(7, bw/3.5)))
+      .text(parent);
   });
 }
 
@@ -643,6 +697,28 @@ function renderDong(sidoId, sgName) {
      <a href="#${sidoId}">${sido.name}</a>
      <span class="sep">›</span>
      <span class="current">${name}</span>`;
+
+  // 지도에서 "수원시" 클릭 시 → 구 선택 화면
+  const subGu = sido.list.filter(s => s.startsWith(name + ' '));
+  if (dongs.length === 0 && subGu.length > 0) {
+    const cards = subGu.map(sg => {
+      const dl = getDongList(sidoId, sg);
+      return `<div class="sigungu-card" onclick="go('${sidoId}/${encodeURIComponent(sg)}')">
+        <div class="sg-name">${sg}</div>
+        <div class="sg-label">${dl.length > 0 ? dl.length+'개 동·읍·면' : '서비스 보기'}</div>
+      </div>`;
+    }).join('');
+    document.getElementById('view').innerHTML = `
+      <button class="back-btn" onclick="go('${sidoId}')">← ${sido.name} 목록으로</button>
+      <div class="sigungu-header">
+        <h2>📍 <span>${sido.name} ${name}</span> 구 선택</h2>
+        <p>구를 선택하면 동·읍·면별 서비스를 안내해 드립니다.</p>
+      </div>
+      <div class="sigungu-grid">${cards}</div>`;
+    document.title = `${sido.name} ${name} 상가철거 | 여비철거`;
+    window.scrollTo({top:0, behavior:'smooth'});
+    return;
+  }
 
   if (dongs.length === 0) {
     renderDetail(sidoId, name, '');
