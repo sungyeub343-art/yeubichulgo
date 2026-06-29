@@ -63,7 +63,8 @@
 
     /* ── 시도 GRID ── */
     .sido-section-label { text-align: center; font-size: .78rem; font-weight: 700; color: var(--c-gray); margin-bottom: 1.2rem; letter-spacing: .06em; }
-    .sido-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 860px; margin: 0 auto; }
+    .sido-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; max-width: 860px; margin: 0 auto; }
+    .map-layout .sido-grid { max-width: none; margin: 0; }
     @media(max-width:640px){ .sido-grid { grid-template-columns: repeat(2, 1fr); } }
     .sido-card { background: var(--c-white); border: 1.5px solid var(--c-silver); border-radius: var(--r); padding: 1.6rem 1rem; text-align: center; cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .15s; }
     .sido-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 18px rgba(208,74,2,.12); transform: translateY(-3px); }
@@ -124,6 +125,17 @@
     .detail-cta h3 { font-family: var(--ff-display); font-size: 1.15rem; font-weight: 900; margin-bottom: .5rem; }
     .detail-cta p { font-size: .85rem; opacity: .85; margin-bottom: 1.2rem; }
     .detail-cta a { display: inline-block; background: #fff; color: var(--c-accent); font-weight: 800; font-size: .95rem; padding: .8rem 2rem; border-radius: 6px; text-decoration: none; margin: .3rem; }
+
+    /* ── MAP ── */
+    .map-layout { display: flex; gap: 2.5rem; align-items: flex-start; }
+    .map-svg-box { flex: 0 0 min(46%, 400px); }
+    .map-svg-box svg { width: 100%; height: auto; display: block; }
+    @media(max-width:840px){ .map-layout { flex-direction:column; } .map-svg-box { display:none; } }
+    .prov { fill:#fde0d5; stroke:#fff; stroke-width:2; cursor:pointer; transition:fill .2s; }
+    .prov:hover { fill:#f26522; }
+    .prov.metro { fill:#f5c0aa; }
+    .prov.metro:hover { fill:#d04a02; }
+    .prov-txt { font-family:"Noto Sans KR",sans-serif; fill:#333; text-anchor:middle; dominant-baseline:middle; pointer-events:none; font-weight:700; }
 
     /* ── FOOTER ── */
     footer { background: var(--c-charcoal); color: #aaa; padding: 2rem; }
@@ -470,6 +482,43 @@ function getSido(id) { return SIDO.find(s => s.id === id); }
 function getDongKey(sidoId, sgName) { return sidoId + '/' + sgName; }
 function getDongList(sidoId, sgName) { return DONG[getDongKey(sidoId, sgName)] || []; }
 
+const KOREA_MAP = `<svg viewBox="0 0 420 540" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 2px 12px rgba(0,0,0,.08))">
+<path class="prov" onclick="go('gangwon')" d="M210,15 L400,15 L400,172 L368,188 L336,202 L308,198 L282,180 L265,153 L250,106 L228,56 Z"/>
+<text class="prov-txt" x="325" y="96" font-size="14">강원</text>
+<path class="prov" onclick="go('gyeonggi')" d="M52,44 L210,15 L228,56 L250,106 L265,153 L250,172 L225,188 L196,198 L166,202 L142,206 L117,198 L92,188 L72,172 L52,148 L40,112 L50,66 Z"/>
+<text class="prov-txt" x="145" y="149" font-size="13">경기</text>
+<path class="prov metro" onclick="go('incheon')" d="M32,84 L82,80 L90,100 L84,124 L61,134 L32,128 Z"/>
+<text class="prov-txt" x="60" y="107" font-size="10">인천</text>
+<path class="prov metro" onclick="go('seoul')" d="M148,96 L183,90 L193,110 L186,126 L157,128 L138,115 Z"/>
+<text class="prov-txt" x="165" y="112" font-size="10">서울</text>
+<path class="prov" onclick="go('chungbuk')" d="M250,153 L282,163 L308,177 L320,190 L318,215 L304,238 L280,250 L255,254 L228,242 L217,220 L223,198 L250,172 Z"/>
+<text class="prov-txt" x="273" y="208" font-size="13">충북</text>
+<path class="prov" onclick="go('chungnam')" d="M44,178 L76,175 L98,184 L123,196 L150,202 L176,200 L200,213 L198,240 L185,266 L162,278 L134,276 L107,262 L78,244 L52,222 L36,202 Z"/>
+<text class="prov-txt" x="113" y="230" font-size="13">충남</text>
+<path class="prov metro" onclick="go('sejong')" d="M198,198 L218,196 L222,215 L202,218 Z"/>
+<text class="prov-txt" x="210" y="211" font-size="8">세종</text>
+<path class="prov metro" onclick="go('daejeon')" d="M183,248 L206,243 L210,266 L186,270 Z"/>
+<text class="prov-txt" x="197" y="260" font-size="8">대전</text>
+<path class="prov" onclick="go('gyeongbuk')" d="M282,163 L336,173 L368,188 L400,208 L400,284 L370,298 L340,306 L310,292 L284,272 L266,254 L260,232 L267,214 L280,202 L308,177 Z"/>
+<text class="prov-txt" x="350" y="240" font-size="13">경북</text>
+<path class="prov metro" onclick="go('daegu')" d="M290,238 L321,230 L328,252 L308,262 L287,252 Z"/>
+<text class="prov-txt" x="308" y="249" font-size="9">대구</text>
+<path class="prov metro" onclick="go('ulsan')" d="M366,288 L400,284 L402,318 L377,326 L355,310 L360,290 Z"/>
+<text class="prov-txt" x="382" y="307" font-size="9">울산</text>
+<path class="prov" onclick="go('jeonbuk')" d="M38,280 L88,270 L116,277 L146,282 L174,296 L174,330 L150,350 L118,355 L84,342 L56,320 L37,302 Z"/>
+<text class="prov-txt" x="105" y="312" font-size="13">전북</text>
+<path class="prov metro" onclick="go('gwangju')" d="M116,355 L146,351 L154,373 L135,381 L112,373 Z"/>
+<text class="prov-txt" x="133" y="369" font-size="9">광주</text>
+<path class="prov" onclick="go('jeonnam')" d="M37,310 L67,322 L103,334 L137,347 L165,360 L162,394 L136,414 L103,420 L71,410 L43,390 L22,360 L31,332 Z"/>
+<text class="prov-txt" x="88" y="378" font-size="13">전남</text>
+<path class="prov" onclick="go('gyeongnam')" d="M174,347 L238,338 L270,329 L306,315 L312,290 L340,306 L370,298 L382,323 L363,358 L326,376 L286,382 L250,378 L216,366 L190,350 Z"/>
+<text class="prov-txt" x="280" y="344" font-size="13">경남</text>
+<path class="prov metro" onclick="go('busan')" d="M358,352 L390,344 L395,371 L370,381 L343,375 L338,356 Z"/>
+<text class="prov-txt" x="367" y="365" font-size="9">부산</text>
+<ellipse class="prov" onclick="go('jeju')" cx="210" cy="494" rx="82" ry="28"/>
+<text class="prov-txt" x="210" y="494" font-size="13">제주</text>
+</svg>`;
+
 function renderSido() {
   document.getElementById('breadcrumb').innerHTML =
     `<a href="areas.html">지역별 서비스</a>`;
@@ -482,8 +531,11 @@ function renderSido() {
     </div>`).join('');
 
   document.getElementById('view').innerHTML = `
-    <div class="sido-section-label">1. 시·도를 선택하세요</div>
-    <div class="sido-grid">${grid}</div>`;
+    <div class="sido-section-label">시·도를 선택하세요</div>
+    <div class="map-layout">
+      <div class="map-svg-box">${KOREA_MAP}</div>
+      <div class="sido-grid">${grid}</div>
+    </div>`;
 
   document.title = '지역별 상가철거 서비스 | 여비철거';
 }
