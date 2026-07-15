@@ -120,6 +120,12 @@
     .service-chip .chip-icon { font-size: 1.4rem; margin-bottom: .3rem; }
     .service-chip .chip-name { font-size: .82rem; font-weight: 700; color: var(--c-black); }
 
+    .detail-gallery { background: var(--c-white); border-radius: var(--r); padding: 1.6rem; margin-bottom: 1.5rem; }
+    .detail-gallery h3 { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 900; color: var(--c-black); margin-bottom: 1rem; }
+    .detail-gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; }
+    .detail-gallery-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; }
+    @media(max-width:640px){ .detail-gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+
     .detail-desc { background: var(--c-white); border-radius: var(--r); padding: 2rem; margin-bottom: 1.5rem; font-size: .9rem; line-height: 2.1; color: var(--c-charcoal); }
     .detail-desc h3 { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 900; color: var(--c-black); margin-bottom: .8rem; }
 
@@ -187,6 +193,7 @@
 </footer>
 
 <script>
+const GALLERY_V = 19; // keep in sync with index.html gal-*.jpg?v= when photos rotate
 const SIDO = [
   { id:'seoul',    name:'서울',  icon:'🏙️', count:'25개 구',
     list:['종로구','중구','용산구','성동구','광진구','동대문구','중랑구','성북구','강북구','도봉구','노원구','은평구','서대문구','마포구','양천구','강서구','구로구','금천구','영등포구','동작구','관악구','서초구','강남구','송파구','강동구'] },
@@ -788,6 +795,16 @@ function renderDetail(sidoId, sgName, dongName) {
       <div class="service-chip"><div class="chip-icon">🪵</div><div class="chip-name">마루철거</div></div>
       <div class="service-chip"><div class="chip-icon">🗑️</div><div class="chip-name">폐기물처리</div></div>
       <div class="service-chip"><div class="chip-icon">💰</div><div class="chip-name">폐업지원금</div></div>
+    </div>
+
+    <div class="detail-gallery">
+      <h3>${fullName} 철거 시공 사진</h3>
+      <div class="detail-gallery-grid">
+        <img src="gal-2.jpg?v=${GALLERY_V}" alt="${fullName} 상가철거 시공 사진1" loading="lazy" />
+        <img src="gal-3.jpg?v=${GALLERY_V}" alt="${fullName} 상가철거 시공 사진2" loading="lazy" />
+        <img src="gal-4.jpg?v=${GALLERY_V}" alt="${fullName} 상가철거 시공 사진3" loading="lazy" />
+        <img src="gal-5.jpg?v=${GALLERY_V}" alt="${fullName} 상가철거 시공 사진4" loading="lazy" />
+      </div>
     </div>
 
     <div class="detail-desc">
