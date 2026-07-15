@@ -127,8 +127,14 @@
     .detail-gallery-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; }
     @media(max-width:640px){ .detail-gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 
-    .detail-desc { background: var(--c-white); border-radius: var(--r); padding: 2rem; margin-bottom: 1.5rem; font-size: .9rem; line-height: 2.1; color: var(--c-charcoal); }
+    .detail-desc { background: var(--c-white); border-radius: var(--r); padding: 2rem; margin-bottom: 1.5rem; font-size: .9rem; color: var(--c-charcoal); }
     .detail-desc h3 { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 900; color: var(--c-black); margin-bottom: .8rem; }
+    .dd-lead { font-weight: 700; color: var(--c-black); font-size: .92rem; margin-bottom: 1.4rem; line-height: 1.7; }
+    .dd-block { padding: 1rem 0; border-top: 1px solid var(--c-bg); }
+    .dd-block:first-of-type { border-top: none; padding-top: 0; }
+    .dd-block h4 { display: flex; align-items: center; gap: .4rem; font-size: .85rem; font-weight: 800; color: var(--c-accent); margin-bottom: .4rem; }
+    .dd-block p { font-size: .86rem; color: var(--c-gray); line-height: 1.8; }
+    .dd-cta-line { margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px solid var(--c-silver); font-weight: 800; color: var(--c-black); text-align: center; font-size: .92rem; }
 
     .detail-cta { background: var(--c-accent); color: #fff; border-radius: var(--r); padding: 2rem; text-align: center; }
     .detail-cta h3 { font-family: var(--ff-display); font-size: 1.15rem; font-weight: 900; margin-bottom: .5rem; }
@@ -810,19 +816,39 @@ function renderDetail(sidoId, sgName, dongName) {
 
     <div class="detail-desc">
       <h3>${fullName} 상가철거 전문 여비철거</h3>
-      <p>${fullName}에서 폐업을 결정하셨다면, 점포철거부터 폐업지원금 신청까지 여비철거가 책임지고 도와드립니다. 상가철거·매장철거는 물론 간판철거·마루철거·인테리어 철거·리모델링 철거까지, 내부철거·부분철거·전체철거 등 규모에 상관없이 모든 철거공사를 한 번에 해결합니다.</p>
-      <br>
-      <p>건물 종류도 가리지 않습니다. 단독주택 철거·다가구주택 철거·빌라 철거·아파트 철거 같은 주택철거는 물론, 공장 철거·창고 철거·사무실 철거, 오래된 슬레이트 철거와 노후건물 철거까지 ${fullName} 어디든 대형 굴착기를 직접 보유하고 있어 외주 없이 빠르고 정밀하게 작업합니다.</p>
-      <br>
-      <p>음식점, 카페, 편의점, 학원, 미용실, 네일샵, 노래방, 헬스장, PC방, 꽃집, 오락실, 인형뽑기, 무인점포 등 업종·리모델링 형태에 관계없이 ${fullName} 어디든 출장 가능하며, 처음 견적 그대로 추가 비용 없이 마무리합니다.</p>
-      <br>
-      <p>간판철거·마루철거·인테리어철거·폐기물처리·폐기물수거까지 한 번에 해결하고, 모든 폐기물은 지자체 허가 절차에 따라 적법하게 처리하여 세금계산서와 폐기물 처리 확인서를 100% 발행합니다.</p>
-      <br>
-      <p>철거비용이 궁금하신가요? 주택철거비용·건물철거비용은 면적, 구조, 폐기물량에 따라 평당 철거비용(철거 평단가)이 달라집니다. 여비철거는 방문 실측 후 정확한 철거 견적서를 드리며, 철거비 견적·철거 무료견적은 언제나 0원입니다.</p>
-      <br>
-      <p>소상공인시장진흥공단의 희망리턴패키지를 통한 소상공인 폐업지원금, 폐업 점포 철거비 지원(점포 철거비 지원금)은 최대 700만원까지 신청 가능하며, 여비철거가 정부24 서류 준비부터 신청까지 무료로 안내해 드립니다. 이 외에도 노후건물 철거지원금, 빈집 철거지원금(빈집 정비사업), 슬레이트 철거 지원금·석면 철거 지원금은 물론, 재개발·재건축 지역이라면 재개발 철거 보상금, 재건축 이주비 지원, 도시정비사업 철거, 공공재개발 철거지원, 뉴타운 철거 지원금 관련 상담도 함께 도와드립니다.</p>
-      <br>
-      <p>${sido.name} ${fullName} 상가철거, 지금 바로 무료 견적을 받아보세요.</p>
+      <p class="dd-lead">${fullName}에서 폐업을 결정하셨다면, 점포철거부터 폐업지원금 신청까지 여비철거가 책임지고 도와드립니다.</p>
+
+      <div class="dd-block">
+        <h4>🏗️ 철거 종류</h4>
+        <p>상가철거·매장철거·간판철거·마루철거·인테리어 철거·리모델링 철거까지, 내부철거·부분철거·전체철거 등 규모에 상관없이 모든 철거공사를 진행합니다.</p>
+      </div>
+
+      <div class="dd-block">
+        <h4>🏠 건물 유형</h4>
+        <p>단독주택·다가구주택·빌라·아파트 등 주택철거부터 공장·창고·사무실 철거, 슬레이트·노후건물 철거까지 ${fullName} 어디든 대형 굴착기를 직접 보유해 외주 없이 빠르고 정밀하게 작업합니다.</p>
+      </div>
+
+      <div class="dd-block">
+        <h4>🏪 가능 업종</h4>
+        <p>음식점·카페·편의점·학원·미용실·네일샵·노래방·헬스장·PC방·꽃집·오락실·인형뽑기·무인점포 등 업종에 관계없이 ${fullName} 어디든 출장 가능하며, 처음 견적 그대로 추가 비용 없이 마무리합니다.</p>
+      </div>
+
+      <div class="dd-block">
+        <h4>🗑️ 폐기물 처리</h4>
+        <p>간판철거·마루철거·인테리어철거·폐기물처리·폐기물수거까지 한 번에 해결하고, 지자체 허가 절차에 따라 적법하게 처리해 세금계산서와 폐기물 처리 확인서를 100% 발행합니다.</p>
+      </div>
+
+      <div class="dd-block">
+        <h4>💰 철거 비용</h4>
+        <p>주택철거비용·건물철거비용은 면적·구조·폐기물량에 따라 평당 철거비용(철거 평단가)이 달라집니다. 방문 실측 후 정확한 철거 견적서를 드리며, 철거비 견적·철거 무료견적은 언제나 0원입니다.</p>
+      </div>
+
+      <div class="dd-block">
+        <h4>📋 정부 지원금</h4>
+        <p>희망리턴패키지 소상공인 폐업지원금, 점포 철거비 지원금은 최대 700만원까지 신청 가능하며 정부24 서류 준비부터 신청까지 무료로 안내합니다. 노후건물·빈집(빈집 정비사업)·슬레이트·석면 철거지원금, 재개발·재건축·도시정비사업·뉴타운 철거 보상금 상담도 함께 도와드립니다.</p>
+      </div>
+
+      <p class="dd-cta-line">${sido.name} ${fullName} 상가철거, 지금 바로 무료 견적을 받아보세요.</p>
     </div>
 
     <div class="detail-cta">
