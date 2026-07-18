@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>경북 문경시 상가철거 | 여비철거</title>
+<meta name="description" content="경북 문경시 상가철거·매장철거·간판철거·마루철거·폐기물처리·폐업지원금 서비스. 출장비·견적비 무료, 당일 방문 견적 가능." />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--c-black:#111;--c-charcoal:#2a2a2a;--c-gray:#6b6b6b;--c-silver:#d4d4d4;--c-bg:#f7f5f2;--c-white:#fff;--c-accent:#d04a02;--c-accent2:#f26522;--ff-display:"Noto Serif KR",serif;--ff-body:"Noto Sans KR",sans-serif;--r:12px}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-body);background:var(--c-bg);color:var(--c-charcoal);line-height:1.7}
+header{position:sticky;top:0;z-index:100;background:var(--c-white);border-bottom:1px solid var(--c-silver);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px}
+.logo-text{font-family:var(--ff-display);font-size:1.2rem;font-weight:900;color:var(--c-black);text-decoration:none}
+.logo-text span{color:var(--c-accent)}
+nav a{text-decoration:none;color:var(--c-charcoal);font-size:.85rem;font-weight:600;margin-left:1.4rem}
+nav a:hover{color:var(--c-accent)}
+.btn-header{background:var(--c-accent);color:#fff;border:none;border-radius:4px;padding:.45rem 1rem;font-size:.82rem;font-weight:700;margin-left:1.6rem;text-decoration:none}
+@media(max-width:768px){nav{display:none}}
+.container{max-width:1060px;margin:0 auto;padding:0 1.5rem}
+.page-hero{background:#111;color:#fff;padding:3rem 2rem;text-align:center}
+.page-hero h1{font-family:var(--ff-display);font-size:clamp(1.4rem,3.4vw,2.2rem);font-weight:900;line-height:1.35}
+.page-hero p{color:#aaa;font-size:.85rem;margin-top:.6rem}
+.breadcrumb{padding:1rem 0;font-size:.8rem;color:var(--c-gray)}
+.breadcrumb a{color:var(--c-gray);text-decoration:none}
+.breadcrumb a:hover{color:var(--c-accent)}
+.breadcrumb .current{color:var(--c-accent);font-weight:700}
+#app{padding:2rem 1.5rem 4rem}
+.link-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-top:1.5rem}
+@media(max-width:640px){.link-grid{grid-template-columns:repeat(2,1fr)}}
+.link-card{display:block;background:var(--c-white);border:1px solid var(--c-silver);border-radius:8px;padding:1rem;text-align:center;text-decoration:none;color:var(--c-black);font-weight:700;font-size:.88rem}
+.link-card:hover{border-color:var(--c-accent);color:var(--c-accent)}
+.detail-hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;border-radius:12px;padding:2.5rem 2rem;text-align:center;margin-bottom:2rem}
+.detail-hero .d-badge{display:inline-block;background:var(--c-accent);color:#fff;font-size:.72rem;font-weight:700;padding:.28rem .9rem;border-radius:20px;margin-bottom:1rem}
+.detail-hero h1{font-family:var(--ff-display);font-size:clamp(1.4rem,3vw,2rem);font-weight:900}
+.detail-hero .d-sub{color:#aaa;font-size:.82rem;margin-top:.5rem}
+.detail-hero .d-free{color:var(--c-accent2);font-size:.85rem;font-weight:700;margin-top:.4rem}
+.detail-hero .d-loc{color:#888;font-size:.78rem;margin-top:.3rem}
+.detail-intro{text-align:center;margin-bottom:2rem;padding:0 1rem}
+.detail-intro p{font-size:.9rem;line-height:2}
+.detail-btns{display:flex;gap:.8rem;justify-content:center;margin-bottom:2.5rem;flex-wrap:wrap}
+.detail-btns a{display:inline-flex;align-items:center;gap:.4rem;padding:.8rem 1.8rem;border-radius:6px;font-size:.9rem;font-weight:800;text-decoration:none}
+.btn-primary{background:var(--c-black);color:#fff}
+.btn-outline{border:2px solid var(--c-charcoal);color:var(--c-charcoal)}
+.detail-services{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+@media(max-width:640px){.detail-services{grid-template-columns:1fr 1fr}}
+.service-chip{background:var(--c-white);border:1px solid var(--c-silver);border-radius:8px;padding:1rem;text-align:center}
+.service-chip .chip-icon{font-size:1.4rem;margin-bottom:.3rem}
+.service-chip .chip-name{font-size:.82rem;font-weight:700;color:var(--c-black)}
+.detail-gallery{background:var(--c-white);border-radius:var(--r);padding:1.6rem;margin-bottom:1.5rem}
+.detail-gallery h3{font-family:var(--ff-display);font-size:1.05rem;font-weight:900;color:var(--c-black);margin-bottom:1rem}
+.detail-gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.detail-gallery-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px}
+@media(max-width:640px){.detail-gallery-grid{grid-template-columns:repeat(2,1fr)}}
+.detail-desc{background:var(--c-white);border-radius:var(--r);padding:2rem;margin-bottom:1.5rem;font-size:.9rem}
+.detail-desc h3{font-family:var(--ff-display);font-size:1.05rem;font-weight:900;color:var(--c-black);margin-bottom:.8rem}
+.dd-lead{font-weight:700;color:var(--c-black);font-size:.92rem;margin-bottom:1.4rem;line-height:1.7}
+.dd-block{padding:1rem 0;border-top:1px solid var(--c-bg)}
+.dd-block:first-of-type{border-top:none;padding-top:0}
+.dd-block h4{display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:800;color:var(--c-accent);margin-bottom:.4rem}
+.dd-block p{font-size:.86rem;color:var(--c-gray);line-height:1.8}
+.dd-cta-line{margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--c-silver);font-weight:800;color:var(--c-black);text-align:center;font-size:.92rem}
+.detail-cta{background:var(--c-accent);color:#fff;border-radius:var(--r);padding:2rem;text-align:center}
+.detail-cta h3{font-family:var(--ff-display);font-size:1.15rem;font-weight:900;margin-bottom:.5rem}
+.detail-cta p{font-size:.85rem;opacity:.85;margin-bottom:1.2rem}
+.detail-cta a{display:inline-block;background:#fff;color:var(--c-accent);font-weight:800;font-size:.95rem;padding:.8rem 2rem;border-radius:6px;text-decoration:none;margin:.3rem}
+footer{background:var(--c-charcoal);color:#aaa;padding:2rem}
+.footer-bottom{max-width:1060px;margin:0 auto;font-size:.75rem;color:#666;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/index.html" class="logo-text">여<span>비</span>철거</a>
+  <nav>
+    <a href="/index.html#about">회사소개</a>
+    <a href="/index.html#services">사업영역</a>
+    <a href="/index.html#gallery">시공사례</a>
+    <a href="/reviews.html">시공후기</a>
+    <a href="/areas.html">지역별 서비스</a>
+    <a href="/index.html#quote-form" class="btn-header">무료 견적 신청</a>
+  </nav>
+</header>
+
+
+<div class="page-hero">
+  <h1>경북 문경시 <em>상가철거</em></h1>
+  <p>경북 문경시 상가철거·매장철거·간판철거 전문 여비철거</p>
+</div>
+<div id="app"><div class="container">
+  <div class="breadcrumb"><a href="/areas/index.html">지역별 서비스</a> <span class="sep">›</span> <a href="/areas/gyeongbuk/index.html">경북</a> <span class="sep">›</span> <span class="current">문경시</span></div>
+
+  <div class="detail-hero">
+    <div class="d-badge">상가철거 전문</div>
+    <h1>문경시 상가철거 가이드</h1>
+    <div class="d-sub">매장철거 · 간판철거 · 마루철거 · 폐기물처리</div>
+    <div class="d-free">출장비 무료 · 견적비 무료</div>
+    <div class="d-loc">경북 문경시 · 상가철거 전문 출장 서비스</div>
+  </div>
+
+  <div class="detail-intro"><p>문경시 철거업체를 찾고 계신가요? 상가 철거부터 원상복구까지 여비철거가 한 번에 해결해 드립니다.</p></div>
+
+  <div class="detail-btns">
+    <a href="/index.html#quote-form" class="btn-primary">📋 무료 견적 신청 →</a>
+    <a href="tel:010-2928-3614" class="btn-outline">☎ 전화 문의 ↗</a>
+  </div>
+
+  <div class="detail-services">
+    <div class="service-chip"><div class="chip-icon">🏗️</div><div class="chip-name">상가철거</div></div>
+    <div class="service-chip"><div class="chip-icon">🏪</div><div class="chip-name">매장철거</div></div>
+    <div class="service-chip"><div class="chip-icon">🪧</div><div class="chip-name">간판철거</div></div>
+    <div class="service-chip"><div class="chip-icon">🪵</div><div class="chip-name">마루철거</div></div>
+    <div class="service-chip"><div class="chip-icon">🗑️</div><div class="chip-name">폐기물처리</div></div>
+    <div class="service-chip"><div class="chip-icon">💰</div><div class="chip-name">폐업지원금</div></div>
+  </div>
+
+  <div class="detail-gallery">
+    <h3>문경시 철거 시공 사진</h3>
+    <div class="detail-gallery-grid">
+      <img src="/gal-2.jpg?v=20" alt="문경시 상가철거 시공 사진1" loading="lazy" />
+      <img src="/gal-3.jpg?v=20" alt="문경시 상가철거 시공 사진2" loading="lazy" />
+      <img src="/gal-4.jpg?v=20" alt="문경시 상가철거 시공 사진3" loading="lazy" />
+      <img src="/gal-5.jpg?v=20" alt="문경시 상가철거 시공 사진4" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="detail-desc">
+    <h3>문경시 상가철거 전문 여비철거</h3>
+    <p class="dd-lead">문경시 철거업체를 찾고 계신가요? 상가 철거부터 원상복구까지 여비철거가 한 번에 해결해 드립니다.</p>
+    <div class="dd-block"><h4>🏗️ 철거 종류</h4><p>상가철거·매장철거·간판철거·마루철거·인테리어 철거·리모델링 철거까지, 내부철거·부분철거·전체철거 등 규모에 상관없이 모든 철거공사를 진행합니다.</p></div>
+    <div class="dd-block"><h4>🏠 건물 유형</h4><p>건물 종류도 가리지 않습니다. 다가구주택·빌라·아파트 같은 주택철거는 물론 공장·창고·사무실, 오래된 슬레이트 지붕과 노후건물 철거까지 문경시 현장에 자체 장비로 직접 투입합니다.</p></div>
+    <div class="dd-block"><h4>🏪 가능 업종</h4><p>음식점·카페·편의점·학원·미용실·네일샵·노래방·헬스장·PC방·꽃집·오락실·인형뽑기·무인점포 등 업종에 관계없이 문경시 어디든 출장 가능하며, 처음 견적 그대로 추가 비용 없이 마무리합니다.</p></div>
+    <div class="dd-block"><h4>🗑️ 폐기물 처리</h4><p>간판철거·마루철거부터 폐기물처리·폐기물수거까지 원스톱으로 진행하고, 모든 폐기물은 지자체 허가를 받아 적법하게 처리한 뒤 증빙서류를 100% 발급합니다.</p></div>
+    <div class="dd-block"><h4>💰 철거 비용</h4><p>주택철거비용·건물철거비용은 면적·구조·폐기물량에 따라 평당 철거비용(철거 평단가)이 달라집니다. 방문 실측 후 정확한 철거 견적서를 드리며, 철거비 견적·철거 무료견적은 언제나 0원입니다.</p></div>
+    <div class="dd-block"><h4>📋 정부 지원금</h4><p>소상공인시장진흥공단의 희망리턴패키지를 통한 폐업지원금과 점포 철거비 지원금은 최대 700만원까지 받으실 수 있으며, 정부24 서류 준비부터 신청까지 무료로 안내해 드립니다. 빈집 철거지원금·슬레이트 철거 지원금·석면 철거 지원금, 재개발·재건축 철거 보상금 상담도 가능합니다.</p></div>
+    <p class="dd-cta-line">경북 문경시 상가철거, 지금 바로 무료 견적을 받아보세요.</p>
+  </div>
+
+  <div class="detail-cta">
+    <h3>문경시 상가철거 무료 견적</h3>
+    <p>지금 신청하시면 당일 방문 견적 가능 · 출장비 무료 · 추가 비용 없음</p>
+    <a href="/index.html#quote-form">📋 무료 견적 신청</a>
+    <a href="tel:010-2928-3614">📞 010-2928-3614</a>
+  </div>
+</div></div>
+
+
+<footer>
+  <div class="footer-bottom">© 2026 여비철거. All Rights Reserved. | 사업자등록번호 : 748-66-00597</div>
+</footer>
+
+</body>
+</html>
