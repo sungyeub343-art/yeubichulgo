@@ -793,7 +793,9 @@ function renderDetail(sidoId, sgName, dongName) {
   const sg = decodeURIComponent(sgName);
   const dong = decodeURIComponent(dongName);
   const fullName = dong ? sg + ' ' + dong : sg;
-  const sidoFull = SIDO_FULL[sidoId] || sido.name;
+  const sidoFullRaw = SIDO_FULL[sidoId] || sido.name;
+  const sidoFull = fullName.startsWith(sidoFullRaw) ? '' : sidoFullRaw;
+  const heading = [sidoFull, fullName].filter(Boolean).join(' ');
   const backHash = dong ? sidoId + '/' + encodeURIComponent(sg) : sidoId;
   const backLabel = dong ? sg + ' 동·읍·면 목록으로' : sido.name + ' 목록으로';
 
@@ -810,10 +812,10 @@ function renderDetail(sidoId, sgName, dongName) {
 
     <div class="detail-hero">
       <div class="d-badge">상가철거 전문</div>
-      <h1>${sidoFull} ${fullName} 상가철거 가이드</h1>
+      <h1>${heading} 상가철거 가이드</h1>
       <div class="d-sub">매장철거 · 간판철거 · 마루철거 · 폐기물처리</div>
       <div class="d-free">출장비 무료 · 견적비 무료</div>
-      <div class="d-loc">${sidoFull} ${fullName} · 상가철거 전문 출장 서비스</div>
+      <div class="d-loc">${heading} · 상가철거 전문 출장 서비스</div>
     </div>
 
     <div class="detail-intro">
@@ -889,7 +891,7 @@ function renderDetail(sidoId, sgName, dongName) {
       <a href="tel:010-2928-3614">📞 010-2928-3614</a>
     </div>`;
 
-  document.title = `${sidoFull} ${fullName} 상가철거 | 여비철거`;
+  document.title = `${heading} 상가철거 | 여비철거`;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
